@@ -1,0 +1,29 @@
+:root {
+  font-family: Montserrat, sans-serif;
+  line-height: 1.5;
+
+  color-scheme: light dark;
+  background-color: #12ff06;
+  color: rgb(255, 0, 255);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+}
+
+button {
+  border: none;
+}
