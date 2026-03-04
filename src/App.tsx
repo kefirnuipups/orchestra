@@ -7,12 +7,14 @@ import { useRef } from "react";
 
 function App() {
 
-    const btnRef = useRef(null);
+    const btnRef = useRef<HTMLButtonElement>(null);
 
-    const handleMove = (e: any) => {
+    const handleMove = (e: React.MouseEvent<HTMLButtonElement>) => {
         const btn = btnRef.current;
+
+        if (!btn) return;
         const rect = btn.getBoundingClientRect();
-        const offsetX = e.clientX - (rect.left + rect.Width/2);
+        const offsetX = e.clientX - (rect.left + rect.width/2);
         const offsetY = e.clientY - (rect.top + rect.height/2);
 
         const moveX = offsetX > 0 ? -50 : 50;
@@ -22,6 +24,7 @@ function App() {
     };
 
     const handleLeave = () => {
+        if (!btnRef.current) return;
         btnRef.current.style.transform = "tranlate(0,0)";
     };
 
