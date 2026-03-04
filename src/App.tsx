@@ -48,7 +48,7 @@ function App() {
         <div className="main">
             <div className="main-text">
                 <SEO
-                    title="Симфонічний Аркєстр | Головна"
+                    title="Національний Симфонічний Оркестр"
                     description="Національний Філармонічний Оркестр — концерти, афіша, новини."
                     keywords="оркестр, симфонічний, концерт, Київ, класична музика, афіша"
                     image="https://national-phil-orc.vercel.app/assets/og-image.png"
