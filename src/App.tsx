@@ -4,18 +4,19 @@ import icon4 from "./assets/icon4.jpg";
 import icon2 from "./assets/icon2.jpg";
 
 import { useRef } from "react";
+import { SEO } from "./SEO.tsx";
 
 function App() {
 
-    const btnRef = useRef<HTMLButtonElement>(null);
+    const btnRefs = useRef<HTMLButtonElement[]>([]);
 
-    const handleMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const btn = btnRef.current;
-
+    const handleMove = (e: React.MouseEvent<HTMLButtonElement>, index: number) => {
+        const btn = btnRefs.current[index];
         if (!btn) return;
+
         const rect = btn.getBoundingClientRect();
-        const offsetX = e.clientX - (rect.left + rect.width/2);
-        const offsetY = e.clientY - (rect.top + rect.height/2);
+        const offsetX = e.clientX - (rect.left + rect.width / 2);
+        const offsetY = e.clientY - (rect.top + rect.height / 2);
 
         const moveX = offsetX > 0 ? -50 : 50;
         const moveY = offsetY > 0 ? -50 : 50;
@@ -23,9 +24,10 @@ function App() {
         btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
     };
 
-    const handleLeave = () => {
-        if (!btnRef.current) return;
-        btnRef.current.style.transform = "tranlate(0,0)";
+    const handleLeave = (index: number) => {
+        const btn = btnRefs.current[index];
+        if (!btn) return;
+        btn.style.transform = "translate(0,0)";
     };
 
   return (
@@ -45,6 +47,14 @@ function App() {
 
         <div className="main">
             <div className="main-text">
+                <SEO
+                    title="Симфонічний Аркєстр | Головна"
+                    description="Національний Філармонічний Оркестр — концерти, афіша, новини."
+                    keywords="оркестр, симфонічний, концерт, Київ, класична музика, афіша"
+                    image="https://national-phil-orc.vercel.app/assets/og-image.png"
+                    url="https://national-phil-orc.vercel.app"
+                />
+
                 <h1>
                     Симфонічний Аркєстр
                 </h1>
@@ -58,7 +68,7 @@ function App() {
         <div className="about">
 
             <div className="about-left">
-                <img src={icon2} />
+                <img src={icon2} alt="Теодор Кухар"/>
 
                 <h2>
                     Тіодор & Co.
@@ -85,12 +95,18 @@ function App() {
                     </div>
 
 
-                    <button ref={btnRef} onMouseMove={handleMove} onMouseLeave={handleLeave}>
+                    <button
+                        ref={(el) => {
+                            if (el) btnRefs.current[0] = el; // записуємо у масив
+                        }}
+                        onMouseMove={(e) => handleMove(e, 0)}
+                        onMouseLeave={() => handleLeave(0)}
+                    >
                         Придбати квиток
                     </button>
                 </div>
 
-                <img src={icon3} />
+                <img src={icon3} alt="Фольклорні пісні дружніх народів"/>
             </div>
 
             <div className="poster">
@@ -100,12 +116,18 @@ function App() {
                         <h3>15 жовтня 2026 - Велика зала Філармонії</h3>
                     </div>
 
-                    <button ref={btnRef} onMouseMove={handleMove} onMouseLeave={handleLeave}>
+                    <button
+                        ref={(el) => {
+                            if (el) btnRefs.current[0] = el; // записуємо у масив
+                        }}
+                        onMouseMove={(e) => handleMove(e, 0)}
+                        onMouseLeave={() => handleLeave(0)}
+                    >
                         Придбати квиток
                     </button>
                 </div>
 
-                <img src={icon4} />
+                <img src={icon4} alt="СимфоРоблокс"/>
 
             </div>
         </div>
